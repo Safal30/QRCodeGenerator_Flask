@@ -8,17 +8,82 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+    />
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous"
+    />
 </head>
 <body>
-    <br>
 
-    <h1 align="center">This is your QR Code</h1>
     
-<!---
-    <div class="image" align="center">
-        <img src="{{url_for('static',filename = '/qrcode.png')}}">
-    </div> 
--->
-    <div class="image" align="center">
-        <img id="picture" src="data:image/jpeg;base64, {{ img }}">
-    </div> 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+
+            <div class="alert alert-success alert-dissmissable fade show" role="alert">
+                <strong>Success! </strong>{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+    <div style="margin-top: 50px;" class="ui container">
+
+
+        <div class="image" align="center">
+            <img id="picture" src="data:image/jpeg;base64, {{ img }}">
+        </div> 
+
+        <div class="button" align="center">
+            <button style="margin-top: 10px" class="ui white button" type="submit">
+                <a href="data:image/jpeg;base64, {{ img }}" download>
+                Download
+                
+
+                <i class="download icon"></i>
+                </a>
+            </button>
+        </div>
+
+
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+    ></script>
+
+
+    <script
+        type="text/javascript"
+        src="{{ url_for('static', filename='index.js') }}"
+    ></script>
+
+    </div>
+
+
+
+  </body>
+  </html>
